@@ -1,0 +1,87 @@
+Standar API
+
+{root.api}/{version}/{grouping}/{endpoint}
+SAMPLE:
+http://mern-api.latihan-blog.com/v1/auth/login
+
+Standar Status Response
+
+200 -> OK                       --> Call API Success
+201 -> CREATED                  --> Post Success
+400 -> BAD REQUEST              --> Error on Client Side (Input salah, dll)
+401 -> UNAUTHORIZED             --> User not authorized to the request.
+403 -> FORBIDDEN                --> User not allowed to access.
+404 -> NOT FOUND                --> Request on server Side
+500 -> INTERNAL SERVER ERROR    --> Error on Server Side
+502 -> BAD GATEWAY              --> Invalid Response From Another Request
+
+GROUP: Authentication
+
+[1] - Register
+{root.api}/{version}/auth/Register
+
+req:
+{
+    "name": "Testing",
+    "email": "test@gmail.com",
+    "password": "123123"
+}
+
+res:
+{
+    "message": "Register Success",
+    "data": {
+        "id": 1,
+        "name": "testing",
+        "email": "test@gmail.com",
+        "password": "123123"
+    }
+}
+
+err-response:
+400 -> Input yang anda masukan tidak valid
+
+[2] - LOGIN
+{root.api}/{version}/auth/login
+
+req:
+{
+    "email": "test@gmail.com",
+    "password": "123123"
+}
+
+GROUP: BLOG
+
+[1] - Create Blog Post
+[POST] : {root.api}/{version}/blog/post
+
+req:
+{
+    "title": "Title Blog",
+    "image": "imagefile.png",
+    "body": "Lorem Ipsum is simply a fokin dummy text of the printing"
+}
+
+res:
+{
+    "message": "Create Blog Post Success",
+    "data": {
+        "post_id": 1,
+        "title": "Title Blog",
+        "image": "imagefile.png",
+        "body": "Lorem Ipsum is simply a fokin dummy text of the printing",
+        "created_at": "11/09/2023",
+        "author": {
+            "uid": 1,
+            "name": "Testing"
+        }
+    }
+}
+
+err-response:
+201 -> Blog Post Berhasil dibuat
+400 -> Input yang anda masukan tidak valid
+
+[2] - Get Blog Post
+[3] - Update Blog Post
+[4] - Delete Blog Post
